@@ -22,3 +22,23 @@ const hasCycle = function(head) {
   }
   return false
 };
+
+// Another
+
+//O(1) Space, 2 pointers
+var hasCycle = function(head) {
+  let fast = head;
+  let slow = head;
+  
+  while(fast !== null) {
+    slow = slow.next;
+    
+    if (fast.next === null) return false;
+    
+    fast = fast.next.next;
+    
+    if(fast === slow) return true;
+  }
+  
+  return false;
+}
