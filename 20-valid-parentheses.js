@@ -71,3 +71,44 @@ const isValid = function(s) {
   }
   return oArr.length > 0 ? false : true;
 };
+
+// Another
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+ var isValid = function(s) {
+  if(s.length % 2) return false;
+  else if (s.length === 0) return true;
+  
+  const helper = [];
+  let curChar;
+  let lastChar;
+  
+  for (let i = 0; i < s.length; i++) {
+    curChar = s.charAt(i);
+    
+    if (charIsLeft(curChar)) {
+      helper.push(curChar);
+    } else if (helper.length) {
+      lastChar = helper.pop();
+      
+      if(!checkValidity(lastChar, curChar))
+        return false;
+    }
+    else return false;
+  }
+  
+  return (helper.length === 0);
+  
+  function charIsLeft(ch) {
+    return (ch === '(' || ch === '{' || ch === '[');
+  }
+  
+  function checkValidity(a, b) {
+    return ((lastChar === '(' && curChar === ')') 
+         || (lastChar === '{' && curChar === '}') 
+         || (lastChar === '[' && curChar === ']') 
+        );
+  }
+};
